@@ -1,6 +1,6 @@
 type Props = {
   label: string;
-  onClick: () => void;
+  onClick?: () => void;
 };
 
 export const BasicButton = ({ label, onClick }: Props) => {

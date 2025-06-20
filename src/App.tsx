@@ -1,13 +1,14 @@
 import { Layout } from "./components/Layout";
 import { Title } from "./components/Title";
-import { BasicButton } from "./components/BasicButton";
+//import { BasicButton } from "./components/BasicButton";
+import { List } from "./components/List";
+import { Form } from "./components/Form";
 
 function App() {
   return (
     <>
       <Layout>
         <Title text="TODOリスト" />
-
         {/* フィルター */}
         <div className="flex justify-center gap-3 mb-6">
           <button className="px-4 py-1 rounded-full bg-pink-200 text-pink-600 font-semibold shadow hover:bg-pink-300 transition border-2 border-pink-100 focus:outline-none focus:ring-2 focus:ring-pink-200">
@@ -19,13 +20,9 @@ function App() {
           <button className="px-4 py-1 rounded-full bg-gray-100 text-gray-500 font-semibold shadow hover:bg-gray-200 transition border-2 border-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200">
             完了済み
           </button>
-          <BasicButton
-            label="全削除"
-            onClick={() => alert("全削除機能は未実装です")}
-          />
         </div>
-
         {/* 追加フォーム */}
+        <Form />
         <form className="flex mb-4 gap-2">
           <input
             type="text"
@@ -40,36 +37,7 @@ function App() {
           </button>
         </form>
 
-        {/* TODOリスト */}
-        <ul className="space-y-3">
-          {/* サンプルアイテム */}
-          <li className="flex items-center justify-between bg-white/70 border border-blue-100 rounded-2xl px-4 py-3 shadow-sm">
-            <div className="flex items-center gap-3">
-              <input
-                type="checkbox"
-                className="accent-pink-300 w-4 h-4"
-                defaultChecked
-              />
-              <span className="text-gray-400 line-through text-base">
-                サンプル完了タスク
-              </span>
-            </div>
-            <button className="text-pink-300 hover:text-pink-400 transition font-bold">
-              削除
-            </button>
-          </li>
-          <li className="flex items-center justify-between bg-white/70 border border-blue-100 rounded-2xl px-4 py-3 shadow-sm">
-            <div className="flex items-center gap-3">
-              <input type="checkbox" className="accent-blue-300 w-4 h-4" />
-              <span className="text-blue-600 text-base">
-                サンプル未完了タスク
-              </span>
-            </div>
-            <button className="text-pink-300 hover:text-pink-400 transition font-bold">
-              削除
-            </button>
-          </li>
-        </ul>
+        <List />
       </Layout>
     </>
   );
