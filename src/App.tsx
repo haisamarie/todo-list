@@ -1,10 +1,12 @@
+import { Layout } from "./components/Layout";
+import { Title } from "./components/Title";
+import { BasicButton } from "./components/BasicButton";
+
 function App() {
   return (
     <>
-      <div className="max-w-md mx-auto mt-10 bg-gradient-to-b from-pink-50 to-blue-50 shadow-xl rounded-3xl p-8">
-        <h1 className="text-2xl font-bold text-pink-400 mb-6 pb-3 text-center tracking-wider">
-          TODOリスト
-        </h1>
+      <Layout>
+        <Title text="TODOリスト" />
 
         {/* フィルター */}
         <div className="flex justify-center gap-3 mb-6">
@@ -17,6 +19,10 @@ function App() {
           <button className="px-4 py-1 rounded-full bg-gray-100 text-gray-500 font-semibold shadow hover:bg-gray-200 transition border-2 border-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200">
             完了済み
           </button>
+          <BasicButton
+            label="全削除"
+            onClick={() => alert("全削除機能は未実装です")}
+          />
         </div>
 
         {/* 追加フォーム */}
@@ -64,7 +70,7 @@ function App() {
             </button>
           </li>
         </ul>
-      </div>
+      </Layout>
     </>
   );
 }
