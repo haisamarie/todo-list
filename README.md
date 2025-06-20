@@ -14,7 +14,7 @@
 | -------------- | --------------- |
 | フレームワーク | React           |
 | 言語           | TypeScript      |
-| スタイル       | CSS modules     |
+| スタイル       | Tailwind        |
 | ライブラリ     | react-hook-form |
 
 ## 📁 ディレクトリ構成
