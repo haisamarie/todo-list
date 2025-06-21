@@ -75,9 +75,13 @@ export const List = () => {
                   onChange={() => toggleTodo(item.id)}
                   className="accent-pink-300 w-4 h-4"
                 />
-                <span className="text-gray-400 line-through text-base">
+                <p
+                  className={`text-base text-gray-400 ${
+                    !item.isCompleted && "line-through"
+                  }`}
+                >
                   {item.text}
-                </span>
+                </p>
               </div>
               {/*onClick には「ボタンを押されたときに呼ばれる関数」を渡す必要があるので、関数を返す無名関数でラップ*/}
               <LinkButton onClick={() => handleDeleteTodo(item.id)} />
