@@ -1,5 +1,5 @@
 import { LinkButton } from "../LinkButton";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 type Items = {
   id: number;
   text: string;
@@ -8,7 +8,14 @@ type Items = {
 
 export const List = () => {
   const [todos, setTodos] = useState<string>("");
-  const [todoList, setTodoList] = useState<Items[]>([]);
+  const data = localStorage.getItem("todoList");
+  // localStorageからデータを取得
+  // 取得したデータをJSON.parseでオブジェクトに変換
+  const [todoList, setTodoList] = useState<Items[]>(JSON.parse(data || "[]"));
+
+  useEffect(() => {
+    localStorage.setItem("todoList", JSON.stringify(todoList));
+  }, [todoList]);
 
   const handleSubmit = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTodos(e.target.value);
