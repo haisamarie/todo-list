@@ -5,22 +5,52 @@ import { List } from "./components/List";
 import { Form } from "./components/Form";
 
 function App() {
+  const handleFilter = (filter: string) => {
+    if (filter === "all") {
+      // すべてのタスクを表示
+      console.log("すべてのタスクを表示");
+    } else if (filter === "active") {
+      // 未完了のタスクを表示
+      console.log("未完了のタスクを表示");
+    } else if (filter === "completed") {
+      // 完了済みのタスクを表示
+      console.log("完了済みのタスクを表示");
+    }
+    // フィルター処理をここに実装
+    console.log(`フィルター: ${filter}`);
+  };
   return (
     <>
       <Layout>
         <Title text="TODOリスト" />
         {/* フィルター */}
         <div className="flex justify-center gap-3 mb-6">
-          <button className="px-4 py-1 rounded-full bg-pink-200 text-pink-600 font-semibold shadow hover:bg-pink-300 transition border-2 border-pink-100 focus:outline-none focus:ring-2 focus:ring-pink-200">
+          <button
+            onClick={() => {
+              handleFilter("all");
+            }}
+            className="px-4 py-1 rounded-full bg-pink-200 text-pink-600 font-semibold shadow hover:bg-pink-300 transition border-2 border-pink-100 focus:outline-none focus:ring-2 focus:ring-pink-200"
+          >
             すべて
           </button>
-          <button className="px-4 py-1 rounded-full bg-blue-100 text-blue-500 font-semibold shadow hover:bg-blue-200 transition border-2 border-blue-100 focus:outline-none focus:ring-2 focus:ring-blue-200">
+          <button
+            onClick={() => {
+              handleFilter("all");
+            }}
+            className="px-4 py-1 rounded-full bg-blue-100 text-blue-500 font-semibold shadow hover:bg-blue-200 transition border-2 border-blue-100 focus:outline-none focus:ring-2 focus:ring-blue-200"
+          >
             未完了
           </button>
-          <button className="px-4 py-1 rounded-full bg-gray-100 text-gray-500 font-semibold shadow hover:bg-gray-200 transition border-2 border-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200">
+          <button
+            onClick={() => {
+              handleFilter("all");
+            }}
+            className="px-4 py-1 rounded-full bg-gray-100 text-gray-500 font-semibold shadow hover:bg-gray-200 transition border-2 border-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
+          >
             完了済み
           </button>
         </div>
+
         {/* 追加フォーム */}
         <Form />
         <form className="flex mb-4 gap-2">

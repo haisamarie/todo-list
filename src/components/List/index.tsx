@@ -40,8 +40,6 @@ export const List = () => {
     );
   };
 
-  console.log(todoList);
-
   return (
     <div>
       <form className="flex mb-4 gap-2">
