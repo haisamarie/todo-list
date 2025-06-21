@@ -32,6 +32,16 @@ export const List = () => {
     });
   };
 
+  const toggleTodo = (id: number) => {
+    setTodoList((prev) =>
+      prev.map((todo) =>
+        todo.id === id ? { ...todo, isCompleted: !todo.isCompleted } : todo
+      )
+    );
+  };
+
+  console.log(todoList);
+
   return (
     <div>
       <form className="flex mb-4 gap-2">
@@ -52,6 +62,7 @@ export const List = () => {
       </form>
 
       <ul className="space-y-3">
+        {}
         {todoList.map((item) => {
           return (
             <li
@@ -61,8 +72,8 @@ export const List = () => {
               <div className="flex items-center gap-3">
                 <input
                   type="checkbox"
+                  onChange={() => toggleTodo(item.id)}
                   className="accent-pink-300 w-4 h-4"
-                  defaultChecked
                 />
                 <span className="text-gray-400 line-through text-base">
                   {item.text}
