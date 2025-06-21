@@ -68,6 +68,7 @@ export const List = () => {
                   {item.text}
                 </span>
               </div>
+              {/*onClick には「ボタンを押されたときに呼ばれる関数」を渡す必要があるので、関数を返す無名関数でラップ*/}
               <LinkButton onClick={() => handleDeleteTodo(item.id)} />
             </li>
           );
