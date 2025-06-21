@@ -6,18 +6,9 @@ type Items = {
   isCompleted: boolean;
 };
 
-const TestData: Items[] = [
-  { id: 1, text: "サンプル完了タスク", isCompleted: true },
-  { id: 2, text: "2つ目のサンプル完了タスク", isCompleted: true },
-  { id: 3, text: "3つ目のサンプル完了タスク", isCompleted: true },
-  { id: 4, text: "3つ目のサンプル完了タスク", isCompleted: true },
-  { id: 5, text: "3つ目のサンプル完了タスク", isCompleted: true },
-  { id: 6, text: "3つ目のサンプル完了タスク", isCompleted: true },
-];
-
 export const List = () => {
   const [todos, setTodos] = useState<string>("");
-  const [todoList, setTodoList] = useState<Items[]>(TestData);
+  const [todoList, setTodoList] = useState<Items[]>([]);
 
   const handleSubmit = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTodos(e.target.value);
@@ -40,6 +31,7 @@ export const List = () => {
       <form className="flex mb-4 gap-2">
         <input
           onChange={handleSubmit}
+          value={todos}
           type="text"
           placeholder="新しいタスクを入力..."
           className="flex-1 border border-pink-200 bg-white/80 rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-pink-200 placeholder:text-pink-300 text-gray-700"
