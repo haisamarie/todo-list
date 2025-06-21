@@ -26,6 +26,12 @@ export const List = () => {
     setTodos("");
   };
 
+  const handleDeleteTodo = (id: number) => {
+    setTodoList((prev) => {
+      return prev.filter((item) => item.id !== id);
+    });
+  };
+
   return (
     <div>
       <form className="flex mb-4 gap-2">
@@ -62,7 +68,7 @@ export const List = () => {
                   {item.text}
                 </span>
               </div>
-              <LinkButton />
+              <LinkButton onClick={() => handleDeleteTodo(item.id)} />
             </li>
           );
         })}
