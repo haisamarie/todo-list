@@ -2,23 +2,70 @@ import { Layout } from "./components/Layout";
 import { Title } from "./components/Title";
 //import { BasicButton } from "./components/BasicButton";
 import { List } from "./components/List";
-import { Form } from "./components/Form";
+import { useEffect, useState } from "react";
+
+type Items = {
+  id: number;
+  text: string;
+  isCompleted: boolean;
+};
+type Filter = "all" | "active" | "completed";
 
 function App() {
-  const handleFilter = (filter: string) => {
-    if (filter === "all") {
-      // すべてのタスクを表示
-      console.log("すべてのタスクを表示");
-    } else if (filter === "active") {
-      // 未完了のタスクを表示
-      console.log("未完了のタスクを表示");
-    } else if (filter === "completed") {
-      // 完了済みのタスクを表示
-      console.log("完了済みのタスクを表示");
-    }
-    // フィルター処理をここに実装
-    console.log(`フィルター: ${filter}`);
+  const [todos, setTodos] = useState<string>("");
+  const [filter, setFilter] = useState<Filter>("all");
+  const data = localStorage.getItem("todoList");
+  // localStorageからデータを取得
+  // 取得したデータをJSON.parseでオブジェクトに変換
+  const [todoList, setTodoList] = useState<Items[]>(JSON.parse(data || "[]"));
+
+  useEffect(() => {
+    localStorage.setItem("todoList", JSON.stringify(todoList));
+  }, [todoList]);
+
+  const handleSubmit = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTodos(e.target.value);
   };
+
+  const handleAddTodo = () => {
+    const newItems: Items = {
+      id: todoList.length + 1,
+      text: todos,
+      isCompleted: true,
+    };
+    setTodoList((prev) => {
+      return [...prev, newItems];
+    });
+    setTodos("");
+  };
+
+  const handleDeleteTodo = (id: number) => {
+    setTodoList((prev) => {
+      return prev.filter((item) => item.id !== id);
+    });
+  };
+
+  const toggleTodo = (id: number) => {
+    setTodoList((prev) =>
+      prev.map((todo) =>
+        todo.id === id ? { ...todo, isCompleted: !todo.isCompleted } : todo
+      )
+    );
+  };
+
+  const handleFilter = (newFilter: Filter) => {
+    setFilter(newFilter);
+  };
+
+  const filteredList = todoList.filter((item) => {
+    if (filter === "active") {
+      return !item.isCompleted;
+    }
+    if (filter === "completed") {
+      return item.isCompleted;
+    }
+    return true;
+  });
   return (
     <>
       <Layout>
@@ -35,7 +82,7 @@ function App() {
           </button>
           <button
             onClick={() => {
-              handleFilter("all");
+              handleFilter("completed");
             }}
             className="px-4 py-1 rounded-full bg-blue-100 text-blue-500 font-semibold shadow hover:bg-blue-200 transition border-2 border-blue-100 focus:outline-none focus:ring-2 focus:ring-blue-200"
           >
@@ -43,7 +90,7 @@ function App() {
           </button>
           <button
             onClick={() => {
-              handleFilter("all");
+              handleFilter("active");
             }}
             className="px-4 py-1 rounded-full bg-gray-100 text-gray-500 font-semibold shadow hover:bg-gray-200 transition border-2 border-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
           >
@@ -52,22 +99,15 @@ function App() {
         </div>
 
         {/* 追加フォーム */}
-        <Form />
-        <form className="flex mb-4 gap-2">
-          <input
-            type="text"
-            placeholder="新しいタスクを入力..."
-            className="flex-1 border border-pink-200 bg-white/80 rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-pink-200 placeholder:text-pink-300 text-gray-700"
-          />
-          <button
-            type="submit"
-            className="bg-pink-300 text-white px-6 py-2 rounded-full hover:bg-pink-400 shadow-sm transition"
-          >
-            追加
-          </button>
-        </form>
 
-        <List />
+        <List
+          handleSubmit={handleSubmit}
+          handleAddTodo={handleAddTodo}
+          handleDeleteTodo={handleDeleteTodo}
+          toggleTodo={toggleTodo}
+          todos={todos}
+          todoList={filteredList}
+        />
       </Layout>
     </>
   );

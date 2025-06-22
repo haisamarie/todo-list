@@ -1,52 +1,25 @@
 import { LinkButton } from "../LinkButton";
-import { useEffect, useState } from "react";
 type Items = {
-  id: number;
-  text: string;
-  isCompleted: boolean;
+  toggleTodo: (id: number) => void;
+  handleAddTodo: () => void;
+  handleDeleteTodo: (id: number) => void;
+  handleSubmit: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  todos: string;
+  todoList: {
+    id: number;
+    text: string;
+    isCompleted: boolean;
+  }[];
 };
 
-export const List = () => {
-  const [todos, setTodos] = useState<string>("");
-  const data = localStorage.getItem("todoList");
-  // localStorageからデータを取得
-  // 取得したデータをJSON.parseでオブジェクトに変換
-  const [todoList, setTodoList] = useState<Items[]>(JSON.parse(data || "[]"));
-
-  useEffect(() => {
-    localStorage.setItem("todoList", JSON.stringify(todoList));
-  }, [todoList]);
-
-  const handleSubmit = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTodos(e.target.value);
-  };
-
-  const handleAddTodo = () => {
-    const newItems: Items = {
-      id: todoList.length + 1,
-      text: todos,
-      isCompleted: true,
-    };
-    setTodoList((prev) => {
-      return [...prev, newItems];
-    });
-    setTodos("");
-  };
-
-  const handleDeleteTodo = (id: number) => {
-    setTodoList((prev) => {
-      return prev.filter((item) => item.id !== id);
-    });
-  };
-
-  const toggleTodo = (id: number) => {
-    setTodoList((prev) =>
-      prev.map((todo) =>
-        todo.id === id ? { ...todo, isCompleted: !todo.isCompleted } : todo
-      )
-    );
-  };
-
+export const List = ({
+  handleAddTodo,
+  handleDeleteTodo,
+  toggleTodo,
+  handleSubmit,
+  todos,
+  todoList,
+}: Items) => {
   return (
     <div>
       <form className="flex mb-4 gap-2">
@@ -67,7 +40,6 @@ export const List = () => {
       </form>
 
       <ul className="space-y-3">
-        {}
         {todoList.map((item) => {
           return (
             <li
@@ -79,6 +51,7 @@ export const List = () => {
                   type="checkbox"
                   onChange={() => toggleTodo(item.id)}
                   className="accent-pink-300 w-4 h-4"
+                  checked={!item.isCompleted}
                 />
                 <p
                   className={`text-base text-gray-400 ${
