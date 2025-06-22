@@ -3,9 +3,10 @@ import { Title } from "./components/Title";
 //import { BasicButton } from "./components/BasicButton";
 import { List } from "./components/List";
 import { useEffect, useState } from "react";
+import { nanoid } from "nanoid";
 
 type Items = {
-  id: number;
+  id: string;
   text: string;
   isCompleted: boolean;
 };
@@ -29,23 +30,21 @@ function App() {
 
   const handleAddTodo = () => {
     const newItems: Items = {
-      id: todoList.length + 1,
+      id: nanoid(),
       text: todos,
-      isCompleted: true,
+      isCompleted: false,
     };
-    setTodoList((prev) => {
-      return [...prev, newItems];
-    });
+    setTodoList((prev) => [...prev, newItems]);
     setTodos("");
   };
 
-  const handleDeleteTodo = (id: number) => {
+  const handleDeleteTodo = (id: string) => {
     setTodoList((prev) => {
       return prev.filter((item) => item.id !== id);
     });
   };
 
-  const toggleTodo = (id: number) => {
+  const toggleTodo = (id: string) => {
     setTodoList((prev) =>
       prev.map((todo) =>
         todo.id === id ? { ...todo, isCompleted: !todo.isCompleted } : todo
@@ -58,14 +57,16 @@ function App() {
   };
 
   const filteredList = todoList.filter((item) => {
-    if (filter === "active") {
+    if (filter === "completed") {
       return !item.isCompleted;
     }
-    if (filter === "completed") {
+    if (filter === "active") {
       return item.isCompleted;
     }
     return true;
   });
+  console.log(filteredList);
+
   return (
     <>
       <Layout>

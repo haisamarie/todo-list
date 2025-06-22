@@ -1,17 +1,16 @@
 import { LinkButton } from "../LinkButton";
 type Items = {
-  toggleTodo: (id: number) => void;
+  toggleTodo: (id: string) => void;
   handleAddTodo: () => void;
-  handleDeleteTodo: (id: number) => void;
+  handleDeleteTodo: (id: string) => void;
   handleSubmit: (e: React.ChangeEvent<HTMLInputElement>) => void;
   todos: string;
   todoList: {
-    id: number;
+    id: string;
     text: string;
     isCompleted: boolean;
   }[];
 };
-
 export const List = ({
   handleAddTodo,
   handleDeleteTodo,
@@ -51,11 +50,11 @@ export const List = ({
                   type="checkbox"
                   onChange={() => toggleTodo(item.id)}
                   className="accent-pink-300 w-4 h-4"
-                  checked={!item.isCompleted}
+                  checked={item.isCompleted}
                 />
                 <p
                   className={`text-base text-gray-400 ${
-                    !item.isCompleted && "line-through"
+                    item.isCompleted && "line-through"
                   }`}
                 >
                   {item.text}
