@@ -2,9 +2,15 @@ type Props = {
   label: string;
   onClick?: () => void;
   style?: "pink" | "blue" | "gray" | "simplePink";
+  disabled?: boolean;
 };
 
-export const BasicButton = ({ label, onClick, style = "pink" }: Props) => {
+export const BasicButton = ({
+  label,
+  onClick,
+  style = "pink",
+  disabled,
+}: Props) => {
   const baseClass =
     "px-4 py-1 rounded-full font-semibold shadow transition focus:outline-none focus:ring-2";
 
@@ -19,6 +25,7 @@ export const BasicButton = ({ label, onClick, style = "pink" }: Props) => {
     <button
       onClick={onClick}
       className={`${baseClass} ${colorClassMap[style]}`}
+      disabled={disabled}
     >
       {label}
     </button>
