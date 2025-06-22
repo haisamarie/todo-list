@@ -13,7 +13,7 @@ type Items = {
     isCompleted: boolean;
   }[];
 };
-export const List = ({
+export const ItemList = ({
   handleAddTodo,
   handleDeleteTodo,
   toggleTodo,

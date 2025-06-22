@@ -1,7 +1,7 @@
 import { Layout } from "./components/Layout";
 import { Title } from "./components/Title";
 import { BasicButton } from "./components/BasicButton";
-import { List } from "./components/List";
+import { ItemList } from "./components/ItemList";
 import { useTodoList } from "./hooks/useTodoList";
 
 function App() {
@@ -14,34 +14,34 @@ function App() {
     handleFilter,
     filteredList,
   } = useTodoList();
+
+  type FilterOption = {
+    label: string;
+    value: "all" | "active" | "completed";
+    style?: "pink" | "blue" | "gray" | "simplePink";
+  };
+
+  const filterOptions: FilterOption[] = [
+    { label: "すべて", value: "all" as const, style: "pink" },
+    { label: "未完了", value: "active" as const, style: "blue" },
+    { label: "完了", value: "completed" as const, style: "gray" },
+  ];
   return (
     <>
       <Layout>
         <Title text="TODOリスト" />
         <div className="flex justify-center gap-3 mb-6">
-          <BasicButton
-            onClick={() => {
-              handleFilter("all");
-            }}
-            label="すべて"
-          />
-          <BasicButton
-            onClick={() => {
-              handleFilter("completed");
-            }}
-            label="すべて"
-            style="blue"
-          />
-          <BasicButton
-            onClick={() => {
-              handleFilter("active");
-            }}
-            label="すべて"
-            style="gray"
-          />
+          {filterOptions.map((opt) => (
+            <BasicButton
+              key={opt.value}
+              onClick={() => handleFilter(opt.value)}
+              label={opt.label}
+              style={opt.style}
+            />
+          ))}
         </div>
 
-        <List
+        <ItemList
           handleSubmit={handleSubmit}
           handleAddTodo={handleAddTodo}
           handleDeleteTodo={handleDeleteTodo}
