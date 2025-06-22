@@ -23,8 +23,8 @@ function App() {
 
   const filterOptions: FilterOption[] = [
     { label: "すべて", value: "all" as const, style: "pink" },
-    { label: "未完了", value: "active" as const, style: "blue" },
-    { label: "完了", value: "completed" as const, style: "gray" },
+    { label: "未完了", value: "completed" as const, style: "blue" },
+    { label: "完了", value: "active" as const, style: "gray" },
   ];
   return (
     <>

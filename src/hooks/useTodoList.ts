@@ -62,7 +62,6 @@ export const useTodoList = () => {
     }
     return true;
   });
-  console.log(filteredList);
   return {
     handleSubmit,
     handleAddTodo,
