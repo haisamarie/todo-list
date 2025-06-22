@@ -1,4 +1,6 @@
 import { LinkButton } from "../LinkButton";
+import { BasicButton } from "../BasicButton";
+
 type Items = {
   toggleTodo: (id: string) => void;
   handleAddTodo: () => void;
@@ -29,13 +31,8 @@ export const List = ({
           placeholder="新しいタスクを入力..."
           className="flex-1 border border-pink-200 bg-white/80 rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-pink-200 placeholder:text-pink-300 text-gray-700"
         />
-        <button
-          onClick={handleAddTodo}
-          type="button"
-          className="bg-pink-300 text-white px-6 py-2 rounded-full hover:bg-pink-400 shadow-sm transition"
-        >
-          追加
-        </button>
+
+        <BasicButton onClick={handleAddTodo} label="追加" style="simplePink" />
       </form>
 
       <ul className="space-y-3">

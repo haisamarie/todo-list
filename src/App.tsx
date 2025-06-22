@@ -1,6 +1,6 @@
 import { Layout } from "./components/Layout";
 import { Title } from "./components/Title";
-//import { BasicButton } from "./components/BasicButton";
+import { BasicButton } from "./components/BasicButton";
 import { List } from "./components/List";
 import { useTodoList } from "./hooks/useTodoList";
 
@@ -18,32 +18,27 @@ function App() {
     <>
       <Layout>
         <Title text="TODOリスト" />
-        {/* フィルター */}
         <div className="flex justify-center gap-3 mb-6">
-          <button
+          <BasicButton
             onClick={() => {
               handleFilter("all");
             }}
-            className="px-4 py-1 rounded-full bg-pink-200 text-pink-600 font-semibold shadow hover:bg-pink-300 transition border-2 border-pink-100 focus:outline-none focus:ring-2 focus:ring-pink-200"
-          >
-            すべて
-          </button>
-          <button
+            label="すべて"
+          />
+          <BasicButton
             onClick={() => {
               handleFilter("completed");
             }}
-            className="px-4 py-1 rounded-full bg-blue-100 text-blue-500 font-semibold shadow hover:bg-blue-200 transition border-2 border-blue-100 focus:outline-none focus:ring-2 focus:ring-blue-200"
-          >
-            未完了
-          </button>
-          <button
+            label="すべて"
+            style="blue"
+          />
+          <BasicButton
             onClick={() => {
               handleFilter("active");
             }}
-            className="px-4 py-1 rounded-full bg-gray-100 text-gray-500 font-semibold shadow hover:bg-gray-200 transition border-2 border-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
-          >
-            完了済み
-          </button>
+            label="すべて"
+            style="gray"
+          />
         </div>
 
         <List
